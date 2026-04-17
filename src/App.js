@@ -12,9 +12,8 @@ function App() {
       <HeroSection />
       <main>
         <AboutSection />
-        <ServicesSection />
-        <ProjectsSection />
-        <ContactSection />
+         <ProjectsSection />
+       
       </main>
       <Footer />
     </div>

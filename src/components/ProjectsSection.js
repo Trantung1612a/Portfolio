@@ -2,33 +2,27 @@ import { useEffect, useState } from "react";
 
 export default function ProjectsSection() {
   const [selectedProject, setSelectedProject] = useState(null);
-  const [pointer, setPointer] = useState({
-    x: 50,
-    y: 35,
-    rotateX: 0,
-    rotateY: 0
-  });
 
   const projects = [
     {
       id: 1,
       tag: "Web",
-      title: "Startup landing page",
+      title: "System Management",
       description: "Fast-loading launch pages designed for conversion.",
       image: "/img/publicinfo.png"
     },
     {
       id: 2,
-      tag: "App",
-      title: "Mobile interface",
+      tag: "web",
+      title: "UI/UX",
       description: "Accessible, polished mobile experiences for modern apps.",
       image: "/img/Screenshot 2026-04-17 095512.png"
     },
     {
       id: 3,
-      tag: "E-commerce",
-      title: "Shop redesign",
-      description: "Product-focused e-commerce layouts with strong storytelling.",
+      tag: "Web",
+      title: "Web Design",
+      description: "Layout optimized for business processes",
       image: "/img/student.png"
     }
   ];
@@ -54,29 +48,6 @@ export default function ProjectsSection() {
     };
   }, [selectedProject]);
 
-  const handleModalPointerMove = (event) => {
-    const rect = event.currentTarget.getBoundingClientRect();
-    const relativeX = (event.clientX - rect.left) / rect.width;
-    const relativeY = (event.clientY - rect.top) / rect.height;
-    const rotateY = (relativeX - 0.5) * 8;
-    const rotateX = (0.5 - relativeY) * 8;
-
-    setPointer({
-      x: Math.max(0, Math.min(100, relativeX * 100)),
-      y: Math.max(0, Math.min(100, relativeY * 100)),
-      rotateX,
-      rotateY
-    });
-  };
-
-  const resetModalPointer = () => {
-    setPointer({
-      x: 50,
-      y: 35,
-      rotateX: 0,
-      rotateY: 0
-    });
-  };
 
   return (
     <section className="projects-section" id="projects">
@@ -114,13 +85,6 @@ export default function ProjectsSection() {
         >
           <div
             className="project-modal__content"
-            style={{
-              "--spotlight-x": `${pointer.x}%`,
-              "--spotlight-y": `${pointer.y}%`,
-              transform: `perspective(1100px) rotateX(${pointer.rotateX}deg) rotateY(${pointer.rotateY}deg)`
-            }}
-            onMouseMove={handleModalPointerMove}
-            onMouseLeave={resetModalPointer}
             onClick={(event) => event.stopPropagation()}
           >
             <button

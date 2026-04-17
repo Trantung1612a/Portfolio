@@ -10,7 +10,6 @@ export default function HeroSection() {
         </p>
         <div className="hero-actions">
           <a href="#projects" className="button primary">View Work</a>
-          <a href="#contact" className="button secondary">Contact Me</a>
         </div>
       </div>
       <div className="hero-card">
