@@ -2,22 +2,24 @@ export default function ServicesSection() {
   return (
     <section className="services-section">
       <div className="section-header">
-        <p className="eyebrow">Services</p>
-        <h2>Solutions for growing businesses.</h2>
+        <p className="eyebrow">Full-stack development</p>
+        <h2>Recent Projects</h2>
       </div>
       <div className="service-cards">
         <article>
           <img src="/img/publicinfo.png" alt="Web Design" className="service-image" />
-          <h3>Web Design</h3>
-          <p>Beautiful, responsive designs built for engagement and clarity.</p>
+          <h3>System Management</h3>
+          <p>Streamlined content management systems designed for administrative efficiency</p>
         </article>
         <article>
+          <img src="/img/Screenshot 2026-04-17 095512.png" alt="UI/UX" className="service-image" />
           <h3>UI/UX</h3>
-          <p>Human-centered interfaces that feel intuitive across devices.</p>
+          <p>User-centric student tracking interfaces with clear, actionable data visualization.</p>
         </article>
         <article>
-          <h3>Brand Strategy</h3>
-          <p>Visual systems and messaging that make brands memorable.</p>
+          <img src="/img/student.png" alt="Brand Strategy" className="service-image" />
+          <h3>Web Design</h3>
+          <p>Comprehensive classroom dashboards providing a 360-degree view of academic life</p>
         </article>
       </div>
     </section>

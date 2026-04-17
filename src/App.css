@@ -174,6 +174,33 @@ h1 {
   color: var(--muted);
 }
 
+.hero-card__stats .service-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  margin: 0.8rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hero-card__stats .service-list li {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.95rem;
+  color: #e2e8f0;
+}
+
+.hero-card__stats .service-list li::after {
+  content: "•";
+  margin: 0 0.75rem;
+  color: var(--muted);
+}
+
+.hero-card__stats .service-list li:last-child::after {
+  content: "";
+  margin: 0;
+}
+
 .hero-card__footer {
   color: var(--muted);
   font-size: 0.95rem;
@@ -241,6 +268,219 @@ h1 {
 
 .project-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.project-image-wrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+
+.project-image {
+  width: 100%;
+  height: 230px;
+  object-fit: cover;
+  transition: transform 260ms ease;
+}
+
+.project-image-wrapper:hover .project-image {
+  transform: scale(1.04);
+}
+
+.project-detail-button {
+  position: absolute;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%) translateY(10px);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(5, 8, 20, 0.82);
+  color: var(--text);
+  border-radius: 999px;
+  padding: 10px 16px;
+  cursor: pointer;
+  opacity: 0;
+  overflow: hidden;
+  transition: opacity 220ms ease, transform 220ms ease, background-color 220ms ease;
+}
+
+.project-detail-button::before {
+  content: "";
+  position: absolute;
+  inset: -30% auto -30% -45%;
+  width: 40%;
+  transform: rotate(22deg);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.34), transparent);
+  animation: buttonShine 2.4s ease-in-out infinite;
+}
+
+.project-image-wrapper:hover .project-detail-button,
+.project-image-wrapper:focus-within .project-detail-button {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.project-detail-button:hover {
+  background: rgba(124, 58, 237, 0.85);
+}
+
+.project-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: radial-gradient(circle at center, rgba(76, 29, 149, 0.28), rgba(2, 6, 23, 0.85));
+  backdrop-filter: blur(4px);
+  animation: projectModalFade 220ms ease;
+}
+
+.project-modal__content {
+  position: relative;
+  width: min(880px, 100%);
+  border-radius: 24px;
+  overflow: hidden;
+  background: var(--surface-strong);
+  border: 1px solid var(--border);
+  box-shadow: 0 25px 80px rgba(2, 6, 23, 0.55);
+  transform-style: preserve-3d;
+  transition: transform 160ms ease-out, box-shadow 220ms ease;
+  animation: projectModalZoom 240ms ease;
+}
+
+.project-modal__content::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    420px circle at var(--spotlight-x, 50%) var(--spotlight-y, 35%),
+    rgba(255, 255, 255, 0.18),
+    rgba(255, 255, 255, 0) 55%
+  );
+  mix-blend-mode: screen;
+  z-index: 2;
+}
+
+.project-modal__content::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  border: 1px solid rgba(196, 181, 253, 0.28);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06), 0 0 36px rgba(124, 58, 237, 0.23);
+  z-index: 3;
+}
+
+.project-modal__image {
+  width: 100%;
+  max-height: 72vh;
+  object-fit: cover;
+  animation: projectImageReveal 500ms ease both;
+}
+
+.project-modal__meta {
+  padding: 22px 24px 26px;
+  animation: projectTextReveal 380ms 80ms ease both;
+  position: relative;
+  z-index: 4;
+}
+
+.project-modal__meta h3 {
+  margin: 0 0 10px;
+}
+
+.project-modal__meta p {
+  margin: 0;
+}
+
+.project-modal__close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(5, 8, 20, 0.75);
+  color: #fff;
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 5;
+  transition: transform 180ms ease, background-color 180ms ease;
+}
+
+.project-modal__close:hover {
+  transform: scale(1.08) rotate(90deg);
+  background: rgba(124, 58, 237, 0.85);
+}
+
+@keyframes projectModalFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes projectModalZoom {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes projectImageReveal {
+  from {
+    opacity: 0;
+    transform: scale(1.08);
+    filter: saturate(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+    filter: saturate(1);
+  }
+}
+
+@keyframes projectTextReveal {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes buttonShine {
+  0% {
+    transform: translateX(-150%) rotate(22deg);
+  }
+  55%,
+  100% {
+    transform: translateX(420%) rotate(22deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-detail-button::before,
+  .project-modal,
+  .project-modal__content,
+  .project-modal__image,
+  .project-modal__meta {
+    animation: none;
+    transition: none;
+  }
 }
 
 .project-tag {
